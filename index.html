@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="./src/index.js" defer></script>
+    <link rel="stylesheet" href="./styles.css">
+    <title>Crée ton profil</title>
+</head>
+
+<body>
+
+    <form id="formInit">
+        <legend>Créer ton profil</legend>
+        <fieldset>
+            <input type="text" name="description" disabled />
+            <button type="button" name="description" action="displayOrswitchDescription">Changer de description</button>
+        </fieldset>
+
+        <fieldset>
+            <input action="addFormPseudo" type="text" name="pseudo" />
+        </fieldset>
+
+        <fieldset>
+            <label for="avatar">Choisi ton avatar</label>
+            <input action="selectAvatar" type="text" name="avatar" />
+        </fieldset>
+
+        <button type="submit" action="checkCondButtonNext" name="buttonNext">Suivant</button>
+    </form>
+
+
+</body>
+
+</html>
