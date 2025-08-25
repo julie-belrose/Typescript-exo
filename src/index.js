@@ -27,8 +27,7 @@ const checkPseudo = (input) => {
         //public //static
 //- Le style de l’avatar sélectionné est visuellement identifiable (bordure, ombre, etc.).
 const selectAvatar = () => {
-        const form = document.getElementById('formAvatar');
-        const avatar = form.avatar.value;
+        const avatar = avatarGroup.avatar.value;
         document.getElementById('avatar')?.classList.add(avatar);
 }
 
@@ -44,12 +43,12 @@ const getSlogan = () => {
 
 //check cond button next
 const checkCondButtonNext = () => {
-        const pseudo = checkPseudo(form.querySelector('#pseudo'));
-        const avatar = !!form.querySelector('img[type="radio"]:checked');
-        const slogan = form.slogan.value.trim() !== '';
+        const pseudo = checkPseudo(pseudoInput);
+        const avatar = !!avatarGroup.querySelector('img[type="radio"]:checked');
+        const slogan = sloganInput.value.trim() !== '';
 
         const canSubmit = pseudo && avatar && slogan;
-        const btn = form.querySelector('#nextBtn');
+        const btn = formInit.querySelector('#nextBtn');
 
         btn.disabled = !canSubmit;
         btn.classList.toggle('enabled', canSubmit);
