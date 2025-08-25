@@ -20,6 +20,17 @@ npm install typescript --save-dev
 npx tsc --init
 ```
 
+```bash
+mkdir TP-typescript/src/
+```
+
+```bash
+touch TP-typescript/src/index.ts
+```
+
+```bash
+node dist/index.js
+```
 
 1. Créez un nouveau dossier de projet et initialisez `npm`.
 2. Installez TypeScript en tant que dépendance de développement.

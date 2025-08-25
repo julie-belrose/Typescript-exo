@@ -1,11 +1,12 @@
 {
-  "name": "TP-DOM",
+  "name": "exo-typescript",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "commit": "cz"
+    "commit": "cz",
+    "start": "node dist/index.ts"
   },
   "keywords": [],
   "author": "",
