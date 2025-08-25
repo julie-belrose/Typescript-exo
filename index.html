@@ -11,23 +11,36 @@
 
 <body>
 
-    <form id="formInit">
+    <form id="formInit" novalidate>
         <legend>Créer ton profil</legend>
+    <!-- Description / slogan -->
         <fieldset>
-            <input type="text" name="description" disabled />
-            <button type="button" name="description" action="displayOrswitchDescription">Changer de description</button>
+            <input id="slogan" name="slogan" type="text" readonly />
+            <button type="button" data-action="getSlogan">Changer de description</button>
         </fieldset>
-
+    
+        <!-- Pseudo -->
         <fieldset>
-            <input action="addFormPseudo" type="text" name="pseudo" />
+            <input id="pseudo" name="pseudo" type="text" autocomplete="nickname" required />
+            <small id="pseudoHelp" class="help">Lettres uniquement (A-Z)</small>
         </fieldset>
-
-        <fieldset>
-            <label for="avatar">Choisi ton avatar</label>
-            <input action="selectAvatar" type="text" name="avatar" />
+    
+        <!-- Avatar -->
+        <fieldset id="avatarGroup" data-action="selectAvatar">
+            <legend>Choisis ton avatar</legend>
+            <label>
+                <img type="radio" src="./assets/avatar1.png" alt="avatar1">
+            </label>
+            <label>
+                <img type="radio" src="./assets/avatar2.png" alt="avatar2">
+            </label>
+            <label>
+                <img type="radio" src="./assets/avatar3.png" alt="avatar3">
+            </label>
         </fieldset>
-
-        <button type="submit" action="checkCondButtonNext" name="buttonNext">Suivant</button>
+    
+        <button id="nextBtn" type="submit" data-action="checkCondButtonNext" disabled>Suivant</button>
+        <button id="resetBtn" type="submit" data-action="reset" class="off">Reset</button>
     </form>
 
 

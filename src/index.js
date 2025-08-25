@@ -1,42 +1,25 @@
 const regexPseudo = /^[a-zA-Z]+$/;
+
 const formInit = document.getElementById('formInit');
+const pseudoInput = document.getElementById('pseudo');
+const sloganInput = document.getElementById('slogan');
+const avatarGroup = document.getElementById('avatarGroup');
+const sloganBtn = document.querySelector('[data-action="getSlogan"]');
 
 // Select Layout
 const selectLayout = (style) => {
-        switch (style) {
-                case 'light':
-                        document.body.classList.remove('dark');
-                        document.body.classList.add('light');
-                        break;
-                case 'dark':
-                        document.body.classList.remove('light');
-                        document.body.classList.add('dark');
-                        break;
-                default:
-                        break;
-        }
+        document.body.classList.toggle('light', style === 'light');
+        document.body.classList.toggle('dark', style === 'dark');
 };
 
 
 //Add pseudo
 //regex `regexPseudo`
-const checkPseudo = () => {
-        const pseudo = document.getElementById('pseudo')?.value;
-        if (regexPseudo.test(pseudo)) {
-                document.getElementById('pseudo')?.classList.remove('error');
-                document.getElementById('pseudo')?.classList.add('success');
-        } else {
-                document.getElementById('pseudo')?.classList.remove('success');
-                document.getElementById('pseudo')?.classList.add('error');
-        }
-}
-
-const addFormPseudo = () => {
-       const formPseudo = document.getElementById('formPseudo');
-       formPseudo.addEventListener('submit', (e) => {
-               e.preventDefault();
-               checkPseudo();
-       });
+const checkPseudo = (input) => {
+        const valid = regexPseudo.test(input?.value.trim());
+        input.classList.toggle('success', valid);
+        input.classList.toggle('error', !valid && input?.value.trim() !== '');
+        return valid;
 }
 
 
@@ -50,50 +33,74 @@ const selectAvatar = () => {
 }
 
 // Add description
-const displayOrswitchDescription = () => {
+const getSlogan = () => {
         const slogans = [
                 'Slogan 1',
                 'Slogan 2',
                 'Slogan 3',
         ];
-        const randomIndex = Math.floor(Math.random() * slogans.length);
-        const randomSlogan = slogans[randomIndex];
-        document.getElementById('slogan').textContent = randomSlogan;
+        return slogans[Math.floor(Math.random() * slogans.length)];
 }
 
 //check cond button next
 const checkCondButtonNext = () => {
-        const pseudo = formInit?.pseudo.value;
-        const avatar = formInit?.avatar.value;
-        const slogan = formInit?.slogan.value;
+        const pseudo = checkPseudo(form.querySelector('#pseudo'));
+        const avatar = !!form.querySelector('img[type="radio"]:checked');
+        const slogan = form.slogan.value.trim() !== '';
 
-        if (pseudo === '' || avatar === '' || slogan === '') {
-                document.getElementById('buttonNext')?.classList.remove('enabled');
-                document.getElementById('buttonNext')?.classList.add('disabled');
-        } else {
-                document.getElementById('buttonNext')?.classList.remove('disabled');
-                document.getElementById('buttonNext')?.classList.add('enabled');
-        }
-}
+        const canSubmit = pseudo && avatar && slogan;
+        const btn = form.querySelector('#nextBtn');
 
-//click buttonNext
-//desactive form
-const desactiveForm = () => {
-        formInit?.classList.add('desactive');
+        btn.disabled = !canSubmit;
+        btn.classList.toggle('enabled', canSubmit);
+        btn.classList.toggle('disabled', !canSubmit);
 }
 
 //reset function
 const reset = () => {
-
+        formInit.reset();
+        init();
 }
+
+const submitForm = () => {
+        formInit.addEventListener('submit', (e) => {
+                e.preventDefault();
+                checkCondButtonNext(formInit);
+                if (e.target.querySelector('#nextBtn').disabled) return;
+
+                console.log('Profil soumis :', {
+                        pseudo: formInit.pseudo.value.trim(),
+                        avatar: formInit.avatar.value,
+                        slogan: formInit.slogan.value.trim(),
+                });
+        });
+}
+
 
 
 // Init
 const init = () => {
-        addFormPseudo();
+
         selectLayout('light');
-        selectAvatar();
-        checkCondButtonNext();
+        sloganInput.value = '';
+        sloganBtn.addEventListener('click', () => {
+                sloganInput.value = getSlogan();
+                checkCondButtonNext(form);
+        })
+
+        pseudoInput.addEventListener('input', () => {
+                checkPseudo(pseudoInput);
+                checkCondButtonNext(form);
+        });
+
+        avatarGroup.addEventListener('change', (e) => {
+                if (e.target.name === 'avatar') {
+                        checkCondButtonNext(form);
+                }
+        });
+
+
+        submitForm();
 }
 
-
+document.addEventListener('DOMContentLoaded', init);
