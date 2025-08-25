@@ -5,6 +5,8 @@ const pseudoInput = document.getElementById('pseudo');
 const sloganInput = document.getElementById('slogan');
 const avatarGroup = document.getElementById('avatarGroup');
 const sloganBtn = document.querySelector('[data-action="getSlogan"]');
+const nextBtn = document.getElementById('nextBtn');
+const resetBtn = document.getElementById('resetBtn');
 
 // Select Layout
 const selectLayout = (style) => {
@@ -58,14 +60,20 @@ const checkCondButtonNext = () => {
 //reset function
 const reset = () => {
         formInit.reset();
+
+        pseudoInput.classList.remove('success', 'error');
+        avatarGroup.querySelectorAll('label').forEach(l => l.classList.remove('selected'));
+        nextBtn.disabled = true;
+        nextBtn.classList.remove('enabled', 'disabled');
+
         init();
 }
 
 const submitForm = () => {
         formInit.addEventListener('submit', (e) => {
                 e.preventDefault();
-                checkCondButtonNext(formInit);
-                if (e.target.querySelector('#nextBtn').disabled) return;
+                checkCondButtonNext();
+                if (nextBtn.disabled) return;
 
                 console.log('Profil soumis :', {
                         pseudo: formInit.pseudo.value.trim(),

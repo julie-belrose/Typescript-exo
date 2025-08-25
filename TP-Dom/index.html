@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="./src/index.js" defer></script>
-    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="src/index.js" defer></script>
+    <link rel="stylesheet" href="TP-Dom/styles.csss.css">
     <title>Crée ton profil</title>
 </head>
 
@@ -29,18 +29,23 @@
         <fieldset id="avatarGroup" data-action="selectAvatar">
             <legend>Choisis ton avatar</legend>
             <label>
-                <img type="radio" src="./assets/avatar1.png" alt="avatar1">
-            </label>
+                <input type="radio" name="avatar" value="avatar1" hidden>
+                <img src="./assets/avatar1.png" alt="avatar1">
+                </label>
+            
             <label>
-                <img type="radio" src="./assets/avatar2.png" alt="avatar2">
-            </label>
+                <input type="radio" name="avatar" value="avatar2" hidden>
+                <img src="./assets/avatar2.png" alt="avatar2">
+                </label>
+            
             <label>
-                <img type="radio" src="./assets/avatar3.png" alt="avatar3">
-            </label>
+                <input type="radio" name="avatar" value="avatar3" hidden>
+                <img src="./assets/avatar3.png" alt="avatar3">
+                </label>
         </fieldset>
     
         <button id="nextBtn" type="submit" data-action="checkCondButtonNext" disabled>Suivant</button>
-        <button id="resetBtn" type="submit" data-action="reset" class="off">Reset</button>
+        <button id="resetBtn" type="button" data-action="reset" class="off">Reset</button>
     </form>
 
 
