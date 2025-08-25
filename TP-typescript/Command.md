@@ -33,7 +33,7 @@ npx tsc
 ```
 
 ```bash
-node dist/index.js
+node ./TP-typescript/dist/index.ts
 ```
 
 ## 3) Nettoyage avec `rimraf`
@@ -42,17 +42,15 @@ node dist/index.js
 pnpm i rimraf --save-dev
 ```
 
-1. Installez `rimraf` comme dépendance de développement.
-2. Dans `package.json`, ajoutez un script `clean` qui supprime le dossier de sortie (`dist/`).
-3. Testez le script en compilant, exécutant, puis nettoyant le projet.
-
+```bash
+    "clean": "rimraf TP-typescript/dist/"
+```
 
 ## 4) Questions de réflexion
 
 * Pourquoi installe-t-on TypeScript comme dépendance de développement et non comme dépendance “classique” ?
+On a besoin de typescript pour compiler le code typescript en javascript.
 * Quelle est l’utilité de `npx` par rapport à une installation globale d’outils ?
+On a besoin de npx pour exécuter des outils sans les installer globalement.
 * Pourquoi ne pas utiliser `rm -rf` pour nettoyer un dossier dans un projet partagé entre plusieurs OS ?
-
-## 5) Challenge bonus
-
-* Ajoutez un script `dev` qui permet d’exécuter directement un fichier `.ts` sans passer par la compilation en JavaScript.
+On a besoin de rimraf pour nettoyer un dossier dans un projet partagé entre plusieurs OS.
