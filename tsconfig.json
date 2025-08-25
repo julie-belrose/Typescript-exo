@@ -2,8 +2,8 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    "rootDir": "./TP-typescript/src",
-    "outDir": "./dist",
+    "rootDir": "TP-typescript/src",
+    "outDir": "TP-typescript/dist",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
@@ -11,5 +11,8 @@
     "types": [
       "node"
     ]
-  }
+  },
+  "include": [
+    "TP-typescript/src/**/*"
+  ]
 }

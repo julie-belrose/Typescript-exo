@@ -14,7 +14,7 @@ npm install typescript --save-dev
   "typescript": "^5.9.2"
 ```
 
-#2
+## 2 Utilisation de `npx`
 
 ```bash
 npx tsc --init
@@ -29,21 +29,18 @@ touch TP-typescript/src/index.ts
 ```
 
 ```bash
+npx tsc
+```
+
+```bash
 node dist/index.js
 ```
 
-1. Créez un nouveau dossier de projet et initialisez `npm`.
-2. Installez TypeScript en tant que dépendance de développement.
-3. Vérifiez que TypeScript apparaît dans la bonne section de `package.json`.
-
-## 2) Utilisation de `npx`
-
-1. Générez un fichier `tsconfig.json` avec la commande appropriée.
-2. Créez un dossier `src/` avec un fichier `index.ts` contenant une petite fonction et un `console.log`.
-3. Compilez le projet avec `npx`.
-4. Vérifiez que le JavaScript compilé est généré et exécutez-le avec Node.
-
 ## 3) Nettoyage avec `rimraf`
+
+```bash
+pnpm i rimraf --save-dev
+```
 
 1. Installez `rimraf` comme dépendance de développement.
 2. Dans `package.json`, ajoutez un script `clean` qui supprime le dossier de sortie (`dist/`).

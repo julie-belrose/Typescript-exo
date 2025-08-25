@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "commit": "cz",
-    "start": "node dist/index.ts"
+    "start": "node ./TP-typescript/dist/index.ts",
+    "clean": "rimraf TP-typescript/dist/"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   "devDependencies": {
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
+    "rimraf": "^6.0.1",
     "typescript": "^5.9.2"
   },
   "config": {
