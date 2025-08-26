@@ -77,3 +77,32 @@ let tache = {
 tache.statut = Statut.TERMINE;
 console.log(`Tâche: ${tache.titre} [${Statut[tache.statut]}]`);
 
+//Exo 7
+enum StatutTache {
+    TODO,
+    EN_COURS,
+    TERMINE
+}
+
+type Tache = {
+    id: number;
+    titre: string;
+    statut: StatutTache;
+};
+
+let taches: Tache[] = [
+    { id: 1, titre: "Apprendre TypeScript", statut: StatutTache.TODO },
+    { id: 2, titre: "Apprendre React", statut: StatutTache.EN_COURS },
+    { id: 3, titre: "Apprendre Angular", statut: StatutTache.TERMINE }
+];
+
+const afficherTachesParStatut = (statut: StatutTache): void => {
+    taches.forEach(tache => {
+        if (tache.statut === statut) {
+            console.log(tache);
+        }
+    });
+};
+
+afficherTachesParStatut(StatutTache.TODO);
+afficherTachesParStatut(StatutTache.TERMINE);
