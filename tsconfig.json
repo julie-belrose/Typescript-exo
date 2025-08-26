@@ -1,18 +1,18 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
-    "rootDir": "TP-typescript/src",
-    "outDir": "TP-typescript/dist",
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
+    "rootDir": "exo-structures/src",
+    "outDir": "exo-structures/dist",
     "module": "nodenext",
     "target": "esnext",
     "types": [
       "node"
-    ]
+    ],
+    "strict": true
   },
   "include": [
-    "TP-typescript/src/**/*"
+    "TP-typescript/src/**/*",
+    "exo-structures/src/**/*",
   ]
 }
+
+  
