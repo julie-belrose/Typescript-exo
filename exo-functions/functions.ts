@@ -194,3 +194,40 @@ console.log("Titre case : " + titreCase("bonjour à tous"));
 console.log("Titre case : " + titreCase("  salut   le  monde  "));
 console.log("Titre case anglais : " + appliquerTransformeur(["la plage", "le marché"], titreCase));
 
+
+// Exo 8
+
+
+
+// Exo 9
+type Priorite = 1 | 2 | 3 | 4 | 5;
+type Tache = { titre: string; faite?: boolean; priorite: Priorite };
+
+const creerTache = (titre: string, priorite: Priorite = 1): Tache => {
+    return { titre, faite: false, priorite };
+};
+
+
+const majTache = (
+    t: Tache,
+    maj: { titre?: string; faite?: boolean, priorite?: Priorite }
+) => {
+
+    return {
+        ...t,
+        ...maj,
+        faite: maj.faite ?? t.faite,
+        priorite: maj.priorite ?? t.priorite
+    };
+};
+
+
+const basculerFaite = (t: Tache): Tache => ({ ...t, faite: !t.faite });
+
+console.log('Exo 9---');
+const t1: Tache = { titre: "Acheter du pain", faite: false, priorite: 3 };
+console.log("Creer tache : " + JSON.stringify(creerTache(t1.titre, t1.priorite)));
+console.log("Creer tache : " + JSON.stringify(creerTache("A faire", 2)));
+console.log("Maj tache : " + JSON.stringify(majTache(t1, { faite: true })));
+console.log("Basculer faite : " + JSON.stringify(basculerFaite(t1)));
+
