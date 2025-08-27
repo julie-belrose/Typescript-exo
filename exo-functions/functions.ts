@@ -199,38 +199,48 @@ console.log("Titre case anglais : " + appliquerTransformeur(["la plage", "le mar
 const controlFormatHeure = (hour: number, minute: number): boolean => {
     const H_MAX = 23;
     const M_MAX = 60;
-    return (hour < 0 || hour > H_MAX || minute < 0 || minute > M_MAX) ? false : true;
+    return (
+        Number.isInteger(hour) && Number.isInteger(minute) &&
+        hour >= 0 && hour <= H_MAX &&
+        minute >= 0 && minute < M_MAX
+    );
 };
 
 const convertirHeuresEnMinutes = (heure: number): number => {
-    const M_MAX = 60;
-    return heure * M_MAX;
+    const M_PAR_HEURE = 60;
+    return heure * M_PAR_HEURE;
 };
 
 const controlFormatMinutes = (minutes: number): boolean => {
     const BORN_MIN = 0;
-    const BORN_MAX = 1440;
-    return (minutes < BORN_MIN || minutes >= BORN_MAX) ? false : true;
+    const BORN_MAX_EXCLU = 1440;
+    return Number.isInteger(minutes) && minutes >= BORN_MIN && minutes < BORN_MAX_EXCLU;
 };
 
 const convertirMinutesEnHeures = (minutes: number): string => {
-    const M_MAX = 60;
-    return `${Math.floor(minutes / M_MAX)}:${minutes % M_MAX}`;
+    const M_PAR_HEURE = 60;
+    const heure = Math.floor(minutes / M_PAR_HEURE);
+    const minute = minutes % M_PAR_HEURE;
+    const PAD_LEN = 2;
+    const PAD_CHAR = "0";
+
+    return `${String(heure).padStart(PAD_LEN, PAD_CHAR)}:${String(minute).padStart(PAD_LEN, PAD_CHAR)}`;
 };
 
-const convertirHeure = (v: number | string): number | string => {
+export function convertirHeure(hhmm: string): number;
+export function convertirHeure(minutes: number): string;
+
+export function convertirHeure(v: number | string): number | string {
 
     if (typeof v === "string") {
-        const [hour, minute] = v.split(":").map(Number);
-        if (!controlFormatHeure(hour, minute)) {
-            return "Format invalide";
-        }
-        return convertirHeuresEnMinutes(hour) + ' ' + (minute === 1 ? "minute" : "minutes");
+        const [hhStr, mmStr] = v.trim().split(":");
+        const hour = Number(hhStr);
+        const minute = Number(mmStr);
+        if (!controlFormatHeure(hour, minute)) return NaN;
+        return convertirHeuresEnMinutes(hour) + minute;
 
     } else if (typeof v === "number") {
-        if (!controlFormatMinutes(v)) {
-            return "Format invalide";
-        }
+        if (!controlFormatMinutes(v)) return "Format invalide";
         return convertirMinutesEnHeures(v);
     }
 
@@ -240,8 +250,9 @@ const convertirHeure = (v: number | string): number | string => {
 console.log('Exo 8---');
 console.log("Convertir heure : " + convertirHeure("10:30"));
 console.log("Convertir heure : " + convertirHeure(630));
-console.log("Convertir heure : " + convertirHeure("10:30"));
-console.log("Convertir heure : " + convertirHeure(1441));
+console.log("Heures -> minutes : " + convertirHeure("10:30"));
+console.log("Heures -> minutes : " + convertirHeure("07:05"));
+console.log("Minutes -> heures : " + convertirHeure(1441));
 
 
 // Exo 9
@@ -257,7 +268,6 @@ const majTache = (
     t: Tache,
     maj: { titre?: string; faite?: boolean, priorite?: Priorite }
 ) => {
-
     return {
         ...t,
         ...maj,
