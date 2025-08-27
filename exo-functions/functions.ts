@@ -196,7 +196,52 @@ console.log("Titre case anglais : " + appliquerTransformeur(["la plage", "le mar
 
 
 // Exo 8
+const controlFormatHeure = (hour: number, minute: number): boolean => {
+    const H_MAX = 23;
+    const M_MAX = 60;
+    return (hour < 0 || hour > H_MAX || minute < 0 || minute > M_MAX) ? false : true;
+};
 
+const convertirHeuresEnMinutes = (heure: number): number => {
+    const M_MAX = 60;
+    return heure * M_MAX;
+};
+
+const controlFormatMinutes = (minutes: number): boolean => {
+    const BORN_MIN = 0;
+    const BORN_MAX = 1440;
+    return (minutes < BORN_MIN || minutes >= BORN_MAX) ? false : true;
+};
+
+const convertirMinutesEnHeures = (minutes: number): string => {
+    const M_MAX = 60;
+    return `${Math.floor(minutes / M_MAX)}:${minutes % M_MAX}`;
+};
+
+const convertirHeure = (v: number | string): number | string => {
+
+    if (typeof v === "string") {
+        const [hour, minute] = v.split(":").map(Number);
+        if (!controlFormatHeure(hour, minute)) {
+            return "Format invalide";
+        }
+        return convertirHeuresEnMinutes(hour) + ' ' + (minute === 1 ? "minute" : "minutes");
+
+    } else if (typeof v === "number") {
+        if (!controlFormatMinutes(v)) {
+            return "Format invalide";
+        }
+        return convertirMinutesEnHeures(v);
+    }
+
+    return "Format invalide";
+};
+
+console.log('Exo 8---');
+console.log("Convertir heure : " + convertirHeure("10:30"));
+console.log("Convertir heure : " + convertirHeure(630));
+console.log("Convertir heure : " + convertirHeure("10:30"));
+console.log("Convertir heure : " + convertirHeure(1441));
 
 
 // Exo 9
