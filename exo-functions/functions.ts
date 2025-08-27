@@ -118,9 +118,7 @@ const erreurFatale = (message: string): never => {
     throw new Error(`Erreur fatale : ${message}`);
 };
 
-const testError = (message?: string) => {
-
-    message = `data corrompue`;
+const testError = (message: string) => {
     try {
         erreurFatale(message);
     } catch (e) {
@@ -129,11 +127,38 @@ const testError = (message?: string) => {
 }
 
 const getMeteo = async (ville: string): Promise<{ ville: string; degres: number }> => {
-    return { ville, degres: 21 };
+    return new Promise<{ ville: string; degres: number }>((resolve, reject) => {
+        setTimeout(() => resolve({ ville, degres: 21 }), 1000);
+    });
 };
 
 console.log('Exo 5---');
 
 logAction("simple log");
-console.log("testError : " + testError());
+console.log("testError : " + testError(`data corrompue`));
 getMeteo("Lyon").then(meteo => console.log(meteo));
+
+
+// Exo 6
+
+type Critere<T> = (v: T) => boolean;
+const filtrer = <T>(arr: T[], critere: Critere<T>): T[] => {
+    return arr.reduce<T[]>((acc, v) => {
+        return critere(v) ? (acc.push(v), acc) : acc;
+    }, []);
+};
+
+const depenseEstGrande = (n: number): boolean => {
+    return n >= 100;
+};
+
+const minLongueur = (n: number): ((s: string) => boolean) => {
+    return (s: string): boolean => s.length >= n;
+};
+
+console.log('Exo 6---');
+console.log("Filtrer : " + filtrer([50, 120, 30], depenseEstGrande));
+console.log("Filtrer : " + filtrer(["café", "épicerie"], minLongueur(7)));
+
+
+// Exo 7
