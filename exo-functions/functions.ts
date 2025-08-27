@@ -162,3 +162,35 @@ console.log("Filtrer : " + filtrer(["café", "épicerie"], minLongueur(7)));
 
 
 // Exo 7
+interface Transformeur {
+    (v: string): string;
+    locale?: string;
+}
+
+const titreCase: Transformeur = (str: string): string => {
+    const locale = titreCase.locale ?? "fr-FR";
+    const regexStartOrSpace = '(^|\\s)';
+    const regexLetter = '(\\p{L})';
+    const wordInitialPattern = new RegExp(`${regexStartOrSpace}${regexLetter}`, 'gu');
+
+    return str.replace(
+        wordInitialPattern,
+        (fullMatch: string, separator: string, letter: string) => {
+            const initialUpper = letter.toLocaleUpperCase(locale);
+            return separator + initialUpper;
+        }
+    );
+};
+
+titreCase.locale = "fr-FR";
+
+const appliquerTransformeur = (textes: string[], t: Transformeur): string[] => {
+    return textes.map(t);
+};
+
+
+console.log('Exo 7---');
+console.log("Titre case : " + titreCase("bonjour à tous"));
+console.log("Titre case : " + titreCase("  salut   le  monde  "));
+console.log("Titre case anglais : " + appliquerTransformeur(["la plage", "le marché"], titreCase));
+
