@@ -1,17 +1,22 @@
 {
   "compilerOptions": {
-    "rootDir": "exo-structures/src",
-    "outDir": "exo-structures/dist",
+    "rootDir": ".",
+    "outDir": "dist",
     "module": "nodenext",
+    "moduleResolution": "nodenext",
     "target": "esnext",
     "types": [
       "node"
     ],
-    "strict": true
+    "strict": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
   },
   "include": [
-    "TP-typescript/src/**/*",
-    "exo-structures/src/**/*",
+    "exo-functions/src/**/*",
+    "TP-typescript/src/**/*"
+    //"exo-structures/src/**/*"
   ]
 }
 
